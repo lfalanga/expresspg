@@ -1,0 +1,17 @@
+{
+  "name": "expresspg",
+  "version": "1.0.0",
+  "description": "Express playground.",
+  "main": "app.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Leandro Falanga",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
