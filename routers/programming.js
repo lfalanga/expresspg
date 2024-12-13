@@ -2,6 +2,10 @@ const express = require("express");
 const routerProgramming = new express.Router();
 const { programming } = require("../data/courses").infoCourses;
 
+// middleware
+routerProgramming.use(express.json());
+
+// routing
 routerProgramming.get("/", (req, res) => {
   res.send(programming);
 });
@@ -36,5 +40,44 @@ routerProgramming.get("/:language/:level", (req, res) => {
     ? res.status(404).send("not found")
     : res.send(filtered);
 });
+
+routerProgramming.post("/", (req, res) => {
+  let newCourse = req.body;
+  programming.push(newCourse);
+  res.send(programming);
+});
+
+routerProgramming.put("/:id", (req, res) => {
+  const updatedCourse = req.body;
+  const id = req.params.id;
+  const index = programming.findIndex(course => course.id == id);
+
+  if (index >= 0) {
+    programming[index] = updatedCourse;
+  }
+  res.send(programming);
+});
+
+routerProgramming.patch("/:id", (req, res) => {
+  const updatedInfo = req.body;
+  const id = req.params.id;
+  const index = programming.findIndex(course => course.id == id);
+
+  if (index >= 0) {
+    const updateCourse = programming[index];
+    Object.assign(updateCourse, updatedInfo);
+  }
+  res.send(programming);
+});
+
+routerProgramming.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  const index = programming.findIndex(course => course.id == id);
+
+  if (index >= 0) {
+    programming.splice(index, 1);
+  }
+  res.send(programming);
+})
 
 module.exports = routerProgramming;
