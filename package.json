@@ -4,7 +4,8 @@
   "description": "Express playground.",
   "main": "app.js",
   "scripts": {
-    "test": "test.js"
+    "test": "node test.js",
+    "start": "node app.js"
   },
   "keywords": [
     "express"
